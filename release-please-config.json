@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "include-component-in-tag": false,
+  "bump-minor-pre-major": true,
+  "packages": {
+    ".": {
+      "extra-files": [
+        "apps/api/package.json",
+        "apps/mobile/package.json",
+        "packages/auth/package.json",
+        "packages/db/package.json",
+        {
+          "type": "json",
+          "path": "apps/mobile/app.json",
+          "jsonpath": "$.expo.version"
+        }
+      ]
+    }
+  },
+  "initial-version": "0.1.0"
+}
