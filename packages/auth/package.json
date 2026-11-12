@@ -1,0 +1,25 @@
+{
+  "name": "@recipebox/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "generate": "dotenv -e ../../.env -- auth generate --config ./auth.config.ts --output ../db/src/schema/auth.ts --yes",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@recipebox/db": "workspace:*",
+    "@better-auth/expo": "catalog:",
+    "better-auth": "catalog:",
+    "drizzle-orm": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "auth": "catalog:",
+    "dotenv-cli": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "RecipeBox",
+    "slug": "recipebox",
+    "version": "0.1.0",
+    "scheme": "recipebox",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.recipebox.app"
+    },
+    "android": {
+      "package": "com.recipebox.app"
+    },
+    "plugins": ["expo-router", "expo-secure-store", "expo-status-bar", "expo-web-browser"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    }
+  }
+}

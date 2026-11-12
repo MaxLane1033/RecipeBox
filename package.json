@@ -1,0 +1,51 @@
+{
+  "name": "recipebox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.27.0",
+  "engines": {
+    "node": ">=24.12.0 <25"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others --names API,MOBILE --prefix-colors cyan,green \"pnpm dev:api\" \"pnpm dev:mobile\"",
+    "dev:api": "pnpm --filter @recipebox/api dev",
+    "dev:mobile": "pnpm --filter @recipebox/mobile start",
+    "dev:ios": "pnpm --filter @recipebox/mobile ios",
+    "dev:android": "pnpm --filter @recipebox/mobile android",
+    "db:up": "docker compose up -d --wait postgres",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "auth:generate": "pnpm --filter @recipebox/auth generate",
+    "db:generate": "pnpm --filter @recipebox/db generate",
+    "db:migrate": "pnpm --filter @recipebox/db migrate",
+    "db:push": "pnpm --filter @recipebox/db push",
+    "db:studio": "pnpm --filter @recipebox/db studio",
+    "generate:api": "node scripts/generate-api.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint:mobile": "pnpm --filter @recipebox/mobile run check:dependencies",
+    "typecheck": "pnpm -r typecheck",
+    "build:api": "pnpm --filter @recipebox/api build",
+    "start:api": "pnpm --filter @recipebox/api start",
+    "check": "pnpm lint && pnpm typecheck && pnpm build:api",
+    "env:setup": "node scripts/setup.mjs",
+    "build:mobile": "pnpm --filter @recipebox/mobile run export",
+    "dev:web": "pnpm --filter @recipebox/mobile run web",
+    "build:web": "pnpm --filter @recipebox/mobile run export:web"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "concurrently": "catalog:",
+    "typescript": "catalog:"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.3.0",
+      "react-dom": "19.3.0"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@recipebox/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "typecheck": "tsc --noEmit",
+    "generate:api": "orval --config orval.config.ts",
+    "export:ios": "expo export --platform ios",
+    "export:android": "expo export --platform android",
+    "export": "expo export --platform ios --platform android --max-workers 2",
+    "check:dependencies": "expo install --check",
+    "web": "expo start --web",
+    "export:web": "expo export --platform web --output-dir dist/web --max-workers 2"
+  },
+  "dependencies": {
+    "@better-auth/expo": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "better-auth": "catalog:",
+    "expo": "~58.0.25",
+    "expo-constants": "~58.0.16",
+    "expo-linking": "~58.0.17",
+    "expo-network": "~58.0.5",
+    "expo-router": "~58.0.31",
+    "expo-secure-store": "~58.0.3",
+    "expo-status-bar": "~58.0.5",
+    "expo-web-browser": "~58.0.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1",
+    "react-native-web": "^0.21.4",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "orval": "catalog:",
+    "typescript": "catalog:"
+  }
+}
