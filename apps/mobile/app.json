@@ -2,7 +2,7 @@
   "expo": {
     "name": "RecipeBox",
     "slug": "recipebox",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "scheme": "recipebox",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,12 @@
     "android": {
       "package": "com.recipebox.app"
     },
-    "plugins": ["expo-router", "expo-secure-store", "expo-status-bar", "expo-web-browser"],
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-status-bar",
+      "expo-web-browser"
+    ],
     "experiments": {
       "typedRoutes": true
     },
