@@ -1,12 +1,1 @@
-import { Stack } from 'expo-router';
-import { colors } from '@/lib/theme';
-
-export default function AppLayout() {
-  return (
-    <Stack
-      screenOptions={{ headerStyle: { backgroundColor: colors.background }, headerTintColor: colors.text }}
-    >
-      <Stack.Screen name="home" options={{ title: 'RecipeBox' }} />
-    </Stack>
-  );
-}
+export { default } from '@/navigation/route-entries/_layout';

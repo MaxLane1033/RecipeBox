@@ -1,6 +1,6 @@
 # RecipeBox
 
-A small TypeScript workspace with a Fastify API, an Expo / React Native app, Better Auth, and PostgreSQL / Drizzle. The starter includes working signup, login, session restoration, an authenticated profile request, and sign-out. Add recipe features inside API modules and mobile screens as the product takes shape.
+A small TypeScript workspace with a Fastify API, an Expo / React Native app, Better Auth, and PostgreSQL / Drizzle. The workspace includes signup, login, session restoration, and an authenticated browser app with Home, Discover, Cookbook, Groups, and Profile. iOS and Android retain the native starter screens. Authentication and account profile use the API; recipes and other product features currently use seeded, account-scoped session state.
 
 ## Prerequisites
 
@@ -64,9 +64,9 @@ Restart Expo after environment changes. To explicitly clear Metro's cache run `p
 
 1. Open the mobile app and choose **Create an account**.
 2. Enter your name, email, and a password of at least 8 characters. Email verification is disabled initially.
-3. The app signs you in and requests `/api/profile` through the generated Orval client. The returned name and email appear under **Your account**.
+3. The app signs you in and requests `/api/profile` through the generated Orval client. In a browser, the main Home feed opens; Profile uses your account name, and Settings shows your email. Native still opens **Your account**.
 4. Reload the app. Better Auth restores the session using SecureStore on native or cookies in the browser.
-5. Sign out, then sign back in. The protected home screen is available only with a session, and account query data is cleared when the user changes or signs out.
+5. On web, open Profile → Settings → Sign out, then sign back in. All main-app and nested URLs require a session. Account query data and prototype app state are cleared when the user changes or signs out.
 
 Useful local URLs:
 
@@ -96,6 +96,18 @@ Feature modules are discovered through `*.controller.ts` default exports. Autolo
 The profile module demonstrates `controller → service → repository` against the existing auth user table. Controllers import an exported service object, services import an exported repository object, and repositories import the shared `db` from `@recipebox/db`. Feature services and repositories do not need factories or registration in `server.ts`/`app.ts`. The shared pool opens connections only when queried. Add feature modules alongside it. Keep reusable mobile components in `apps/mobile/src/components`. There is no shared domain, contract, or UI package until another consumer needs one.
 
 `@recipebox/auth/server` and `@recipebox/db` are server-only. Mobile initializes its own Better Auth React client with the Expo plugin. Native requests attach the stored session cookie through `src/lib/http.ts`; the API validates the session before returning profile data. There is no separate JWT or token-refresh implementation.
+
+## Browser main app
+
+`pnpm dev:web` uses the existing Expo Router / Metro web target. Login and signup keep the existing Better Auth client and cookie transport. After login, `/home` opens the migrated main app; Home, Discover, Cookbook, Groups, Profile, recipe detail/editing, cooking logs, versions, cooking mode, and the existing nested demo pages are URL-backed under the protected `(app)` group.
+
+- `apps/mobile/src/web/` contains the DOM feature components, state, data, helpers, navigation adapters, and scoped design tokens migrated from RecipeBoxDemo.
+- `apps/mobile/src/app/(app)/` contains universal route adapters. Their external `src/navigation/route-entries/*.web.tsx` implementations open the browser screens; matching `.tsx` entries preserve native Home and return unsupported native routes there. Platform selection happens outside Expo's route context so DOM-only features stay out of native bundles.
+- The authenticated web layout mounts the app provider keyed by user ID. Account names come from Better Auth / the generated profile query; editing the name updates Better Auth. Settings uses real sign-out and clears the query cache. Cooking-level storage is scoped per account.
+- Personal recipes, cookbook changes, attempts, versions, communities, and other prototype state reset on full reload or sign-out. Seeded posts and history are sample content, not database-backed user records. Adding durable recipe features requires API feature modules and migrations separately.
+- Tailwind CSS 4 runs through Metro/PostCSS. Its DOM reset is scoped to `.recipebox-app` to preserve the React Native web login UI. Lucide is used only by web feature components. React, Expo Router, Better Auth, TanStack Query, TypeScript, and Biome are reused from the workspace; no Vite or second router is included.
+
+The migrated visual and product references are in `apps/mobile/src/web/DESIGN.md` and `PRODUCT.md`. The source demo remains unchanged. Web deployment needs an SPA fallback to `index.html` for direct nested URLs because Expo exports `web.output: "single"`.
 
 ## API errors
 

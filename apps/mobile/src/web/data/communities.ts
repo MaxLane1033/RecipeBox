@@ -1,0 +1,93 @@
+import type { CookingCommunity } from '@/web/types/domain';
+
+export const INITIAL_COMMUNITIES: CookingCommunity[] = [
+  {
+    id: 'bb',
+    name: 'Budget bites',
+    members: '12.4k members',
+    blurb: 'Quick food that costs less',
+    priv: false,
+    status: 'joined',
+    cover: 'Veggie fried rice',
+    posts: [
+      { name: 'Mina', title: 'Veggie fried rice' },
+      {
+        name: 'Dev',
+        title: 'Five-ingredient tomato pasta',
+        text: 'Pantry staples, one pot, twenty minutes.',
+      },
+    ],
+  },
+  {
+    id: 'wt',
+    name: 'The weeknight table',
+    members: '4.8k members',
+    blurb: 'Good dinners for busy evenings',
+    priv: false,
+    status: 'joined',
+    cover: 'Garlic butter pasta',
+    posts: [
+      { name: 'Jo', title: 'Garlic butter pasta' },
+      { name: 'Mina', title: 'Egg fried rice' },
+    ],
+  },
+  {
+    id: 'pf',
+    name: 'Plant-forward kitchen',
+    members: '3.2k members',
+    blurb: 'Make vegetables the best part of dinner',
+    priv: false,
+    status: 'joined',
+    cover: 'Crispy smashed potatoes',
+    posts: [
+      { name: 'Dev', title: 'Crispy smashed potatoes' },
+      { name: 'Priya', title: 'Veggie fried rice' },
+    ],
+  },
+  {
+    id: 'pp',
+    name: 'Pasta practice',
+    members: '1.6k members',
+    blurb: 'Better sauces, one attempt at a time',
+    priv: false,
+    status: 'joined',
+    cover: 'Chili crisp noodles',
+    posts: [
+      { name: 'Sam', title: 'Chili crisp noodles' },
+      { name: 'Jo', title: 'Garlic butter pasta' },
+    ],
+  },
+  {
+    id: 'mp',
+    name: 'Weekend meal prep',
+    members: '6.7k members',
+    blurb: 'A little planning for an easier week',
+    priv: false,
+    status: 'joined',
+    cover: 'Egg fried rice',
+    posts: [
+      { name: 'Mina', title: 'Egg fried rice' },
+      { name: 'Dev', title: 'Sheet pan chicken' },
+    ],
+  },
+  {
+    id: 'op',
+    name: 'One-pan club',
+    members: '8.1k members',
+    blurb: 'Dinner, minus the dish pile',
+    priv: false,
+    status: 'none',
+    cover: 'Sheet pan chicken',
+    posts: [{ name: 'Sam', title: 'Sheet pan chicken' }],
+  },
+  {
+    id: 'ss',
+    name: 'Sunday supper',
+    members: '2.3k members · Invite only',
+    blurb: 'Slow meals with good company',
+    priv: true,
+    status: 'none',
+    cover: 'Shakshuka',
+    posts: [{ name: 'Priya', title: 'Shakshuka' }],
+  },
+];
