@@ -43,6 +43,21 @@
       "assist": {
         "enabled": false
       }
+    },
+    {
+      "includes": ["apps/mobile/src/web/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noReactNativeRawText": "off"
+          }
+        }
+      }
     }
-  ]
+  ],
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  }
 }

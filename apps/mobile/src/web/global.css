@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "./";
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@theme {
+  --color-paper: #f8f7f2;
+  --color-surface: #f0f2eb;
+  --color-dark: #e7eddf;
+  --color-card: #ffffff;
+  --color-green: #275640;
+  --color-green-dark: #1d4432;
+  --color-terra: #df492d;
+  --color-brown: #275640;
+  --color-butter: #f7e8de;
+  --color-ink: #263a2e;
+  --color-muted: #616b5e;
+  --color-rule: #dfe3d7;
+  --color-danger: #b43c25;
+  --color-gold: #d5a238;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-hand: "Manrope", system-ui, sans-serif;
+  --radius-control: 8px;
+  --radius-control-inner: 6px;
+  --spacing-control: 40px;
+  --spacing-control-small: 32px;
+  --spacing-control-tabs: 36px;
+}
+
+@layer base {
+  /* Keep the DOM app reset inside its shell; the existing RN-web auth UI is independent. */
+  :where(.recipebox-app, .recipebox-app *, .recipebox-app *::before, .recipebox-app *::after) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  .recipebox-app {
+    width: 100%;
+    min-width: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+  }
+  .recipebox-app :is(button, input, textarea, select, optgroup) {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+  }
+  .recipebox-app :is(button, input:where([type="button"], [type="reset"], [type="submit"])) {
+    appearance: button;
+  }
+  .recipebox-app a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  .recipebox-app :is(ol, ul, menu) {
+    list-style: none;
+  }
+  .recipebox-app table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  .recipebox-app :is(img, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+    vertical-align: middle;
+  }
+  .recipebox-app :is(img, video) {
+    max-width: 100%;
+    height: auto;
+  }
+  .recipebox-app :is(b, strong) {
+    font-weight: bolder;
+  }
+  .recipebox-app dialog {
+    margin: auto;
+  }
+  .recipebox-app dialog:not([open]) {
+    display: none;
+  }
+  .recipebox-app [hidden]:not([hidden="until-found"]) {
+    /* biome-ignore lint/complexity/noImportantStyles: hidden panels must stay hidden even when utility display classes are present. */
+    display: none !important;
+  }
+  .recipebox-app button {
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+      background-color 160ms ease-out,
+      color 160ms ease-out;
+  }
+  .recipebox-app button:disabled {
+    cursor: default;
+  }
+  .recipebox-app :is(button, a, summary):focus-visible,
+  .recipebox-app input:is([type="radio"], [type="checkbox"], [type="range"]):focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+  .recipebox-app input:not([type="radio"], [type="checkbox"], [type="range"]):focus,
+  .recipebox-app :is(textarea, select):focus {
+    outline: none;
+    border-color: var(--color-green);
+  }
+  .recipebox-app :is(input, textarea, select) {
+    accent-color: var(--color-green);
+    caret-color: var(--color-green);
+  }
+  .recipebox-app :is(h1, h2, h3) {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    line-height: 1.25;
+    text-wrap: balance;
+    letter-spacing: -0.025em;
+  }
+  .recipebox-app h1 {
+    font-size: 28px;
+  }
+  .recipebox-app h2 {
+    font-size: 19px;
+  }
+  .recipebox-app h3 {
+    font-size: 16px;
+  }
+  .recipebox-app p {
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+  .recipebox-app label {
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .recipebox-app label .field {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .recipebox-app textarea {
+    display: block;
+    width: 100%;
+    min-height: 96px;
+    margin-top: 8px;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-control);
+    background: white;
+    padding: 10px 12px;
+    resize: vertical;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .recipebox-app ::placeholder {
+    color: var(--color-muted);
+    opacity: 1;
+  }
+  .recipebox-app ::selection {
+    background: var(--color-butter);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .recipebox-app .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 28px 0 12px;
+  }
+  .recipebox-app .field-input {
+    width: 100%;
+    min-height: var(--spacing-control);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-control);
+    background: white;
+    padding: 7px 12px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .recipebox-app .field-input:focus {
+    border-color: var(--color-green);
+  }
+  .recipebox-app .text-action {
+    min-height: var(--spacing-control);
+    border-radius: var(--radius-control);
+    color: var(--color-green);
+    font-weight: 750;
+    font-size: 13px;
+    text-underline-offset: 4px;
+  }
+  .recipebox-app .panel {
+    border: 1px solid var(--color-rule);
+    border-radius: 16px;
+    background: white;
+    padding: 18px;
+  }
+  .recipebox-app .notice {
+    border-radius: 12px;
+    background: var(--color-dark);
+    padding: 14px;
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+  .recipebox-app .toggle-row i::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+  }
+  .recipebox-app .text-tabs button.active::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 3px;
+    background: var(--color-green);
+    border-radius: 3px;
+  }
+  .recipebox-app .radio-list i.on::after,
+  .recipebox-app .radio-cards .active > i::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--color-green);
+  }
+  .recipebox-app .toggle-row i.on::after {
+    left: 19px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recipebox-app *,
+  .recipebox-app *::before,
+  .recipebox-app *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced motion must override utility animations and transitions. */
+    transition-duration: 0ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced motion must override utility animations and transitions. */
+    animation-duration: 0ms !important;
+  }
+}
